@@ -1,20 +1,27 @@
 
-class Solution {
-    ArrayList <Integer> array= new ArrayList<>();
+class Solution 
+{
     public int fib(int n)
     {
-        array.addAll(Collections.nCopies(n+1, -1));
-        return fibDP(n,array);
+        return fibTabDP(n);
     }
-    public int fibDP(int n, ArrayList <Integer> arr) 
+    public int fibTabDP(int n)
     {
-        if(n<=1)
-        return n;
-        if(arr.get(n)!=-1)
+        if(n==0)
+        return 0;
+        if(n==1)
+        return 1;
+        int dp[]= new int[n+1];
+        for(int i=0;i<n;i++)
         {
-            return arr.get(n);
+            dp[i]=0;
         }
-        arr.set(n,fibDP(n-1,arr)+fibDP(n-2,arr));
-        return arr.get(n);
+        dp[0]=0;
+        dp[1]=1;
+        for(int i=2;i<=n;i++)
+        {
+            dp[i]=dp[i-2]+dp[i-1];
+        }
+        return dp[n];
     }
 }
